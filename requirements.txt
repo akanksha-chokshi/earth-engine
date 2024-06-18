@@ -1,0 +1,6 @@
+streamlit
+ee
+pandas
+numpy
+geemap
+streamlit-folium
