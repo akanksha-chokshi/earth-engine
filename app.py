@@ -4,16 +4,17 @@ import numpy as np
 import geemap
 import streamlit as st
 from streamlit_folium import folium_static
+from google.oauth2 import service_account
+from ee import oauth
 
 st.title("Landcover Classification using Sentinel2 and Dynamic World")
 
-# Authenticate and initialize the Earth Engine API
-def initialize_ee():
+def authenticate_with_service_account():
     service_account_info = st.secrets["gcp_service_account"]
-    credentials = ee.ServiceAccountCredentials(service_account_info['client_email'], service_account_info)
+    credentials = service_account.Credentials.from_service_account_info(service_account_info, scopes = oauth.SCOPES)
     ee.Initialize(credentials)
 
-initialize_ee()
+authenticate_with_service_account()
 
 # User input for polygon coordinates
 polygon_input = st.sidebar.text_area("Enter Polygon Coordinates (as a list of lists, e.g., [[lon1, lat1], [lon2, lat2], ...])", "", height = 300)
