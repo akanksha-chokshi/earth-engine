@@ -9,8 +9,9 @@ st.title("Landcover Classification using Sentinel2 and Dynamic World")
 
 # Authenticate and initialize the Earth Engine API
 def initialize_ee():
-    ee.Authenticate()
-    ee.Initialize()
+    service_account_info = st.secrets["gcp_service_account"]
+    credentials = ee.ServiceAccountCredentials(service_account_info['client_email'], service_account_info)
+    ee.Initialize(credentials)
 
 initialize_ee()
 
