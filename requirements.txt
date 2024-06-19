@@ -4,6 +4,6 @@ pandas
 numpy
 geemap
 streamlit-folium
-google-uauth
+google-oauth
 earthengine-api
 folium
