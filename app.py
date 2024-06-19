@@ -1,12 +1,14 @@
 import ee
 import pandas as pd
 import numpy as np
-import geemap
+import geemap.foliumap as geemap
 import streamlit as st
-from streamlit_folium import folium_static
+from streamlit_folium import st_folium
 from google.oauth2 import service_account
 from ee import oauth
+import os
 
+os.environ["EARTHENGINE_TOKEN"] = st.secrets["EARTHENGINE_TOKEN"]
 st.title("Landcover Classification using Sentinel2 and Dynamic World")
 
 def authenticate_with_service_account():
@@ -151,7 +153,7 @@ if submit_button and polygon_input:
 
         Map.addLayerControl()
 
-        Map.to_streamlit(height=600)
+        Map.to_streamlit(height = 600)
 
         def calculate_area_proportions(classified, geometry):
             reducer = ee.Reducer.frequencyHistogram()
@@ -282,3 +284,4 @@ if submit_button and polygon_input:
 
     except Exception as e:
         st.error(f"Error: {e}")
+
