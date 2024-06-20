@@ -7,3 +7,4 @@ streamlit-folium
 google-oauth
 earthengine-api
 folium
+matplotlib
