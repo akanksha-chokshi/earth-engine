@@ -10,7 +10,7 @@ import os
 import matplotlib.pyplot as plt
 
 os.environ["EARTHENGINE_TOKEN"] = st.secrets["EARTHENGINE_TOKEN"]
-st.title("Landcover Classification using Sentinel2 and Dynamic World")
+st.title("Landcover Classification using Sentinel-2 and Dynamic World")
 
 def authenticate_with_service_account():
     service_account_info = st.secrets["gcp_service_account"]
@@ -80,7 +80,7 @@ if submit_button and polygon_input:
 
         def load_datasets(geometry, start_date, end_date):
             # Load ESA WorldCover dataset
-            worldCover = ee.Image('ESA/WorldCover/v100/2020')
+            worldCover = ee.Image(f'ESA/WorldCover/v100/{year}')
             
             # Create training points from the WorldCover dataset
             trainingPoints = worldCover.sample(
