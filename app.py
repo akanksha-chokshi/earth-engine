@@ -80,7 +80,7 @@ if submit_button and polygon_input:
 
         def load_datasets(geometry, start_date, end_date):
             # Load ESA WorldCover dataset
-            worldCover = ee.Image(f'ESA/WorldCover/v100/{year}')
+            worldCover = ee.Image(f'ESA/WorldCover/v100/2020')
             
             # Create training points from the WorldCover dataset
             trainingPoints = worldCover.sample(
