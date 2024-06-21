@@ -115,7 +115,7 @@ if submit_button and polygon_input:
             .filter(ee.Filter.date(start_date, end_date)) \
             .filter(ee.Filter.bounds(geometry)) \
             .map(maskS2clouds) \
-            .select('B.*')
+            .select(['B2', 'B3', 'B4', 'B8']) 
         
         # Create a median composite
         s2composite = s2.median()
@@ -166,13 +166,13 @@ if submit_button and polygon_input:
         
         # Classify the Dynamic World image
         dwclassified = dwComposite.classify(dwclassifier)
-        
+
         return s2composite, s2classified, dwComposite, dwclassified, worldCover, trainingSet, validationSet
 
     s2composite, s2classified, dwComposite, dwclassified, worldCover, trainingSet, validationSet = load_datasets(geometry, start_date, end_date)
 
     # Display the input composite
-    rgbVis = {'min': 0.0, 'max': 3000, 'bands': ['B4', 'B3', 'B2']}
+    rgbVis = {'min': 0.0, 'max': 0.3, 'bands': ['B4', 'B3', 'B2']}
     Map = geemap.Map(center=[polygon_coords[0][1], polygon_coords[0][0]], zoom=10)
     Map.centerObject(geometry, 14)
     Map.addLayer(s2composite.clip(geometry), rgbVis, 'S2 Composite (RGB)')
